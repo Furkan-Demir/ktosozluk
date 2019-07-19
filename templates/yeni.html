@@ -1,0 +1,40 @@
+{% extends "sistem.html" %}
+{% block title %} KTO-Sözlük | Yeni {% endblock %}
+
+{% block body %}
+
+<br>
+<div class="container">
+<div class="row">
+<div class="col-12"><div class="d-flex justify-content-center"><h4 class="display-4"> Yeni Başlıklar </h4></div></div>
+    <div class="col-md-8 col-sm-12">    <!-- Orta Bar -->
+
+<ul class="list-group">
+
+{% for yeniler in yeniler %}
+  <a href="/baslik/{{yeniler['baslik_id']}}"><li class="list-group-item text-lowercase text-break">
+  {{ yeniler['baslik_baslik'] }} <small class="text-muted">({{ yeniler['baslik_puan'] }})</small>
+  </li></a>
+{% endfor %}
+
+</ul>
+<br>
+
+    </div>                              <!-- Orta Bar -->
+
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+
+    <div class = "col-md-4 col-sm-12">      <!-- Sag Bar --> 
+
+
+    </div>                                  <!-- Sag Bar -->
+
+
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+</div> <!--    row    -->
+</div> <!-- container -->
+{% endblock body %}

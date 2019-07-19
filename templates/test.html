@@ -1,0 +1,16 @@
+{{ entrysay }}
+<select name="sayfalandirma" onchange="location = this.value;">
+{% for p in listem %}
+ <option value="{{ p }}">{{ p }}</option>
+{% endfor %}
+</select>
+
+	<li class="page-item active"><a class="page-link" href="/baslik/{{ baslik_id }}/{{ sayfaid }}">1</a></li>
+
+
+<nav aria-label="saysaysay">
+  <ul class="pagination pagination-sm">
+    <li class="page-item"><a class="page-link" href="/baslik/{{ baslik_id }}/{{ sayfaid - 1 }}"><</a></li>
+    <li class="page-item"><a class="page-link" href="/baslik/{{ baslik_id }}/{{ sayfaid - 1 }}">></a></li>
+  </ul>
+</nav>

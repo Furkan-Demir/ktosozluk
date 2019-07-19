@@ -1,0 +1,50 @@
+{% extends "sistem.html" %}
+{% block title %} KTO-Sözlük | Topluluklar 49 {% endblock %}
+
+{% block body %}
+<br>
+<div class="container">
+<div class="row">
+
+
+
+
+
+{% for topluluklar in topluluklar %}
+<!-- Simple Card -->
+<div class="col-md-4 col-sm-12">
+<a href="/topluluk/{{ topluluklar['tp_id'] }}">
+<div class="card">
+<div class="card-body text-center">
+<img class="rounded-circle shadow" src="{{ url_for('static', filename='image/event/d.jpg') }}" width="70">
+
+        <h5 class="card-title"><br>{{ topluluklar['tp_kisaltma'] }}</h5>
+        <p class="card-text text-muted">
+           {{ topluluklar['tp_ad'] }}
+        </p>
+
+    </div>
+</div></a>
+<br>
+</div>
+
+<!-- Simple Card -->
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> <!--    row    -->
+</div> <!-- container -->
+
+
+{% endblock body %}

@@ -1,0 +1,99 @@
+{% extends "sistem.html" %}
+{% block title %} Profil | {{ session['name'] }} {% endblock %}
+{% block body %}
+<br>
+<div class="container">
+<div class="row">
+
+ <div class="col-md-4 col-sm-12">    
+         <br>
+         <br>
+         <div class="card shadow">
+<!-- Author Card -->
+<div class="card shadow-sm border-0">
+<div class="card-body text-center">
+
+    <img class="rounded-circle shadow mt-neg5" src="../static/image/pp/{{ profilim['pp'] }}" width="70" height="70" >
+
+    <h5 class="card-title">{{profilim['name']}}</h5>
+    <p class="card-text text-muted">
+    {% if profilim['bio'] %}
+         {{ profilim['bio'] }}
+    {% else %}
+    Biografi Girilmemiş...
+    {% endif %}
+          {% if profilim['bolum'] %}
+         <br>  <br><i class="fas fa-university"></i> {{ profilim['bolum'] }} 
+         {% else %}
+         <br> <br> <i class="fas fa-university"></i> Bölüm Seçilmemiş...
+         {% endif %}
+    </p>
+    <br>
+    <div class="text-center">
+        {% if profilim['face'] %}
+        <a target="_blank" href="http://facebook.com/{{ profilim['face'] }}"><span class="iconbox iconsmall rounded-circle bg-secondary text-white mr-1">
+        <i class="fab fa-facebook-f"></i></span></a>
+        {% else %}
+        {% endif %}
+        {% if profilim['twitter'] %}
+        <a target="_blank" href="http://twitter.com/{{ profilim['twitter'] }}"><span class="iconbox iconsmall rounded-circle bg-cyan text-white mr-1">
+        <i class="fab fa-twitter"></i></span></a>
+        {% else %}
+        {% endif %}
+        {% if profilim['insta'] %}
+        <a target="_blank" href="http://instagram.com/{{ profilim['insta'] }}"><span class="iconbox iconsmall rounded-circle bg-purple text-white">
+        <i class="fab fa-instagram"></i></span></a>
+        {% else %}
+        {% endif %}
+    </div>
+
+</div>
+</div>
+</div>
+<br>
+{% if basliklarimicek %}
+<div class="card shadow">
+<div class="card-body text-center"> Açtığım Son 5 Başlık </div>
+{% for basliklarimicek in basliklarimicek %}
+<a href="/baslik/{{ basliklarimicek['baslik_id'] }}">
+<li class="list-group-item text-lowercase">{{ basliklarimicek['baslik_baslik'] }}</li></a>
+{% endfor %}
+
+
+</div>
+{% else %}
+{% endif %}
+
+        </div>
+        <br>
+
+<div class="col-md-8 col-sm-12">
+<br>
+<br>
+  <div class="card shadow">
+<div class="d-flex justify-content-center"><h2> {{ textprofil }}: </h2><br></div>
+
+<div class="col-12">
+{% for entrylerim in entrylerim %}
+<div class="card shadow text-lowercase">
+<a href="/baslik/{{ entrylerim['baslik_id'] }}">&nbsp;&nbsp;&nbsp;{{ entrylerim['baslik_baslik'] }} </a>
+&nbsp;&nbsp;&nbsp;&nbsp; {{ entrylerim['entry_entry'] }}
+<p class="text-muted text-right " style="font-size:12px; "> <i>{{ entrylerim['entry_date'] }}</i></p>
+
+</div>
+<br>
+{% endfor %}
+ </div>
+ 
+    </div>
+</div>
+
+
+
+        
+
+
+</div>
+</div>
+<br>
+{% endblock body %}

@@ -1,0 +1,196 @@
+{% extends "sistem.html" %}
+{% block title %} KTO-Sözlük | {{ tpp['tp_kisaltma']}} {% endblock %}
+{% block body %}
+<br>
+{% if yetkicek['yetki_from_rank'] == 3 or yetkicek['yetki_from_rank'] == 2 %}
+
+<!-- haber ekle butonu -->
+<button type="button" class="btn btn-primary w-25" data-toggle="modal" data-target="#haberekle">
+Haber Ekle</button>
+
+<!-- haber ekle modal -->
+<div class="modal fade" id="haberekle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+					<h3 class="heading mt-4">Haberinizi Yazınız</h3>
+          <form action="/tpost" method="POST">
+          
+          <div class="invisible"><textarea class="form-control"  rows="0" name ="tphaber_date" id="tphaber_date">{{ tphaber_date }}</textarea></div>
+          <div class="invisible"><textarea class="form-control"  rows="0" name ="tp_from" id="tp_from">{{ tpp['tp_id'] }}</textarea></div>
+    <div class="col">
+        <input type="text" class="form-control input-round" placeholder="Başlık" id="tp_baslik" name="tp_baslik">
+    </div>
+    <br>
+    <div class="col">
+        <textarea class="form-control" placeholder="Açıklama" id="tp_aciklama" rows="5" name ="tp_aciklama"></textarea>
+    </div>
+    <br>
+    <div class="col">
+        <button type="submit" class="btn btn-primary btn-round">Paylaş</button>
+    </div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+{% endif %}
+
+<div class="container">
+<div class="row">
+<div class="col-md-2 col-sm-0"></div>
+ <div class="col-md-8 col-sm-12">    
+         <br>
+         <br>
+
+         <div class="card shadow">
+<!-- Author Card -->
+<div class="card shadow-sm border-0">
+<div class="card-body text-center">
+    <img class="rounded-circle shadow mt-neg5" src="{{ url_for('static', filename='image/event/d.jpg') }}" width="70">
+    <h5 class="card-title">{{ tpp['tp_ad']}}</h5>
+    <p class="card-text text-muted">
+    {{ tpp['tp_aciklama']}}
+
+    </p>
+    <br>
+    <div class="text-center">
+        {% if tpp['tp_face'] %}
+        <a target="_blank" href="http://facebook.com/{{ profilim['face'] }}"><span class="iconbox iconsmall rounded-circle bg-secondary text-white mr-1">
+        <i class="fab fa-facebook-f"></i></span></a>
+        {% else %}
+        {% endif %}
+        {% if tpp['tp_twitter'] %}
+        <a target="_blank" href="http://twitter.com/{{ profilim['twitter'] }}"><span class="iconbox iconsmall rounded-circle bg-cyan text-white mr-1">
+        <i class="fab fa-twitter"></i></span></a>
+        {% else %}
+        {% endif %}
+        {% if tpp['tp_insta'] %}
+        <a target="_blank" href="http://instagram.com/{{ profilim['insta'] }}"><span class="iconbox iconsmall rounded-circle bg-purple text-white">
+        <i class="fab fa-instagram"></i></span></a>
+        {% else %}
+        {% endif %}
+    </div>
+
+</div>
+</div>
+</div>
+        </div>
+        <div class="col-md-2 col-sm-0"></div>   
+        <br>
+<br>
+<div class= "col-12">
+  <button class="btn btn-primary align-center" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Üyeler
+  </button>
+
+<div class="collapse" id="collapseExample">
+<br>
+<div class="table-wrapper">
+      <!--Table-->
+      <table class="table">
+
+        <!--Table head-->
+        <thead>
+          <tr>
+
+            <th scope="col">
+              <p>Nick
+              </p>
+            </th>
+
+
+            <th scope="col">
+              <p>Görevi
+              </p>
+            </th>
+			<th scope="col">
+              <p>Profil
+              </p>
+            </th>
+          </tr>
+        </thead>
+		<tbody>{% for yetkilerr in yetkilerr %}
+                  <tr>
+
+            <td>{{ yetkilerr['nick'] }}</td>
+{% if yetkilerr['yetki_from_rank'] == 1 %}
+            <td>Üye</td>
+{% elif yetkilerr['yetki_from_rank'] == 2 %}
+            <td>x</td>
+{% elif yetkilerr['yetki_from_rank'] == 3 %}
+            <td>Başkan</td>
+{% endif %}
+
+
+			<td>
+            <h5>
+            <a href="../profil/{{ yetkilerr['nick'] }}" class="badge badge-pill purple-gradient">
+            <i class="far fa-user-circle"></i></a></h5></td>
+            
+          </tr>
+{% endfor %}
+                  </tbody>
+        <!--Table body-->
+      </table>
+      <!--Table-->
+    </div>
+</div>
+</div>
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ust sag panel -->
+
+ <!-- ust sag panel -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+
+<div class="col-md-12 col-sm-12">
+<br>
+<br>
+  <div class="card shadow">
+<div class="d-flex justify-content-center"><h2> Haberler </h2><br></div>
+
+<div class="col-12">
+{% for tphaber in tphaber %}
+<div class="card shadow-lg">
+<br>
+<h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ tphaber['tphaber_baslik']}} </h3>
+<div class="col-12"><span style="margin-left:2em">{{ tphaber['tphaber_aciklama']}} </span><br>
+
+<p class="text-muted text-right" style="font-size:12px;"><i>{{ tphaber['tphaber_date']}}&nbsp;&nbsp;&nbsp;</i></p>
+</div>
+ </div>
+ <br>
+{% endfor %}
+
+
+
+
+
+
+ <br>
+ </div>
+ 
+    </div>
+</div>
+
+
+
+        
+
+
+</div>
+</div>
+<br>
+{% endblock body %}

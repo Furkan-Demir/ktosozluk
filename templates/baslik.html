@@ -1,0 +1,97 @@
+{% extends "sistem.html" %}
+{% block title %} KTO-Sözlük | Gündem {% endblock %}
+{% block body %}
+<br>
+<div class="container">
+<div class="row">
+
+<div class="col-md-12 col-sm-12">
+<div class="card shadow">
+<h4 class="display-5 text-center text-lowercase">{{baslikcek['baslik_baslik']}} </h4>
+<br>
+{% for entrycek in entrycek %}
+
+<div class="col-md-12 col-sm-12">
+<div class="card shadow">
+
+<div class="d-none d-md-block"> 
+<div class="media">
+	&nbsp;	
+ <a href="/profil/{{ entrycek['nick'] }}"><img class="rounded-circle shadow" src="/../static/image/pp/{{ entrycek['pp'] }}" width="70" height="70"></a>
+ 	&nbsp;	&nbsp;
+ <div class="media-body">
+<h6> {{ entrycek['name'] }} </h6>
+ <p class="text-break text-lowercase">{{ entrycek['entry_entry'] }}</p>
+ </div>
+ 
+   </div>
+  <p class="text-muted text-right" style="font-size:12px; "> <i>{{ entrycek['entry_date'] }}</i></p>
+   </div>
+
+<div class="d-block d-sm-none">  
+<div class="media">
+	&nbsp;	
+    <a href="/profil/{{ entrycek['nick'] }}"><img class="rounded-circle shadow" src="/../static/image/pp/{{ entrycek['pp'] }}" width="50" height="50"></a>
+ 	&nbsp;	&nbsp;
+ <div class="media-body">
+<h6> {{ entrycek['name'] }} </h6>
+ <p class="text-break text-lowercase">{{ entrycek['entry_entry'] }}</p>
+ </div>
+   </div>
+ <p class="text-muted text-right" style="font-size:12px;"><i> {{ entrycek['entry_date'] }} </i></p>
+</div>
+</div>
+</div>
+<br>
+
+{% endfor %}
+
+</div>
+<br>
+
+<nav aria-label="saysaysay" class="nav justify-content-center">
+  <ul class="pagination pagination-sm">
+{% if sayfaid == 1 %}
+{% else %}
+    <li class="page-item"><a class="page-link" href="/baslik/{{ baslik_id }}/{{ sayfaid - 1 }}"><</a></li>
+{% endif %}
+
+		<select name="sayfalandirma" onchange="location = this.value;">
+{% for p in listem %}
+ <option value="{{ p }}">{{ p }}</option>
+{% endfor %}
+</select>
+{% if sayfaid == listem[-1] %}
+{% else %}
+    <li class="page-item"><a class="page-link" href="/baslik/{{ baslik_id }}/{{ sayfaid + 1 }}">></a></li>
+{% endif %}
+  </ul>
+  <p class="text-muted" size="1">{{sayfaid}}. sayfayı görüntülüyorsunuz</p>
+</nav>
+
+
+<br>
+{% if session['nick'] %}
+
+
+<div class="card">
+<form action="/baslik/{{ baslikcek['baslik_id'] }}" method="post">
+
+<div class="form-group">
+    <textarea class="form-control" id="entry_entry" rows="3" name ="entry_entry"></textarea>
+    
+</div>
+<button type="submit" class="btn btn-primary btn-round">Yolla</button>
+</form>
+</div>
+{% else %}
+{% endif %}
+
+
+<br>
+</div>
+</div>
+</div>
+
+
+{% endblock body %}

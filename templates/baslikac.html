@@ -1,0 +1,53 @@
+{% extends "sistem.html" %}
+{% block title %} KTO-Sözlük | Başlık Aç {% endblock %}
+{% block body %}
+<br>
+{% if session['nick'] %}
+<div class="container">
+<div class="row">
+<div class="col-md-1 col-sm-0"></div>
+<div class="col-md-10 col-sm-12">
+<div class="d-flex justify-content-center"><h4 class="display-4"> Başlık Aç </h4></div>
+<div class="card">
+<form action="/baslikac" method="POST">
+<div class="form-group">
+
+    <textarea class="form-control" id="mesaj" maxlength="50" rows="2" name ="baslik_baslik"></textarea>
+<p id="karakter"></p>
+</div>
+<button type="submit" class="btn btn-outline-primary btn-round float-right shadow">Başlık Aç</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+{% else %}
+{% endif %}
+
+<br>
+<script>
+"use strict";
+  var mesaj = document.getElementById("mesaj");
+  var karakter = document.getElementById("karakter");
+
+  var karakterSiniri = 50;
+
+  mesaj.onkeyup = karakterKontrol;
+  mesaj.onkeydown = karakterKontrol;
+
+  function karakterKontrol() {
+    var mesajUzunluk = this.value.length;
+
+    if (karakterSiniri >= mesajUzunluk) {
+      var kalan = karakterSiniri - mesajUzunluk;
+      karakter.innerHTML = kalan + " karakter kaldı";
+
+    } else {
+      this.value = this.value.substr(0, karakterSiniri);
+    }
+  }
+</script>
+{% endblock body %}
+
+
+

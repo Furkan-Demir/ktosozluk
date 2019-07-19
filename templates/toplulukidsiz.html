@@ -1,0 +1,156 @@
+{% extends "sistem.html" %}
+{% block title %} KTO-Sözlük | {{ tpp['tp_kisaltma']}} {% endblock %}
+{% block body %}
+<br>
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-2 col-sm-0"></div>
+ <div class="col-md-8 col-sm-12">    
+         <br>
+         <br>
+
+         <div class="card shadow">
+<!-- Author Card -->
+<div class="card shadow-sm border-0">
+<div class="card-body text-center">
+    <img class="rounded-circle shadow mt-neg5" src="{{ url_for('static', filename='image/event/d.jpg') }}" width="70">
+    <h5 class="card-title">{{ tpp['tp_ad']}}</h5>
+    <p class="card-text text-muted">
+    {{ tpp['tp_aciklama']}}
+
+    </p>
+    <br>
+    <div class="text-center">
+        {% if tpp['tp_face'] %}
+        <a target="_blank" href="http://facebook.com/{{ profilim['face'] }}"><span class="iconbox iconsmall rounded-circle bg-secondary text-white mr-1">
+        <i class="fab fa-facebook-f"></i></span></a>
+        {% else %}
+        {% endif %}
+        {% if tpp['tp_twitter'] %}
+        <a target="_blank" href="http://twitter.com/{{ profilim['twitter'] }}"><span class="iconbox iconsmall rounded-circle bg-cyan text-white mr-1">
+        <i class="fab fa-twitter"></i></span></a>
+        {% else %}
+        {% endif %}
+        {% if tpp['tp_insta'] %}
+        <a target="_blank" href="http://instagram.com/{{ profilim['insta'] }}"><span class="iconbox iconsmall rounded-circle bg-purple text-white">
+        <i class="fab fa-instagram"></i></span></a>
+        {% else %}
+        {% endif %}
+    </div>
+
+</div>
+</div>
+</div>
+        </div>
+        <div class="col-md-2 col-sm-0"></div>   
+        <br>
+<br>
+<div class= "col-12">
+  <button class="btn btn-primary align-center" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Üyeler
+  </button>
+
+<div class="collapse" id="collapseExample">
+<br>
+<div class="table-wrapper">
+      <!--Table-->
+      <table class="table">
+
+        <!--Table head-->
+        <thead>
+          <tr>
+
+            <th scope="col">
+              <p>Nick
+              </p>
+            </th>
+
+
+            <th scope="col">
+              <p>Görevi
+              </p>
+            </th>
+			<th scope="col">
+              <p>Profil
+              </p>
+            </th>
+          </tr>
+        </thead>
+		<tbody>{% for yetkilerr in yetkilerr %}
+                  <tr>
+
+            <td>{{ yetkilerr['nick'] }}</td>
+{% if yetkilerr['yetki_from_rank'] == 1 %}
+            <td>Üye</td>
+{% elif yetkilerr['yetki_from_rank'] == 2 %}
+            <td>x</td>
+{% elif yetkilerr['yetki_from_rank'] == 3 %}
+            <td>Başkan</td>
+{% endif %}
+
+
+			<td>
+            <h5>
+            <a href="../profil/{{ yetkilerr['nick'] }}" class="badge badge-pill purple-gradient">
+            <i class="far fa-user-circle"></i></a></h5></td>
+            
+          </tr>
+{% endfor %}
+                  </tbody>
+        <!--Table body-->
+      </table>
+      <!--Table-->
+    </div>
+</div>
+</div>
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ust sag panel -->
+
+ <!-- ust sag panel -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+
+<div class="col-md-12 col-sm-12">
+<br>
+<br>
+  <div class="card shadow">
+<div class="d-flex justify-content-center"><h2> Haberler </h2><br></div>
+
+<div class="col-12">
+{% for tphaber in tphaber %}
+<div class="card shadow-lg">
+<br>
+<h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ tphaber['tphaber_baslik']}} </h3>
+<div class="col-12"><span style="margin-left:2em">{{ tphaber['tphaber_aciklama']}} </span><br>
+
+<p class="text-muted text-right" style="font-size:12px;"><i>{{ tphaber['tphaber_date']}}&nbsp;&nbsp;&nbsp;</i></p>
+</div>
+ </div>
+ <br>
+{% endfor %}
+
+
+
+
+
+
+ <br>
+ </div>
+ 
+    </div>
+</div>
+
+
+
+        
+
+
+</div>
+</div>
+<br>
+{% endblock body %}

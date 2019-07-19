@@ -1,0 +1,108 @@
+
+{% extends "sistem.html" %}
+
+{% block title %} KTO-Sözlük | Panel {% endblock %}
+
+{% block body %}
+{% if rankcek %}
+<br>
+    <div class="container">
+ <div class="row">
+
+
+        <div class="col-md-4 col-sm-12"> <!-- Sol Bar -->
+            <div class="card shadow">
+
+
+
+
+
+            </div>  <!-- card bitis -->
+        </div>  <!-- Sol Bar Bitis-->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+            <div class="col-md-8 col-sm-12">    <!-- orta Bar -->
+                <div class="card shadow">
+
+<table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col-2">Rumuz</th>
+      <th scope="col-7">İtiraf</th>
+      <th scope="col">Onay</th>
+      <th scope="col">Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    {% for itiraflar in itiraflar %}
+    <tr>
+      <td> {{ itiraflar['rumuz'] }}</td>
+      <td>    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itiraf-{{ itiraflar['itiraf_id'] }}">
+Oku</button></td>
+      <td><form action="/panel/onay/{{ itiraflar['itiraf_id'] }}" method="POST"><button class="badge badge-info"><i class="far fa-check-circle"></i></button></form> </td> 
+     <td><form action="/panel/sil/{{ itiraflar['itiraf_id'] }}" method="POST"><button class="badge badge-info"><i class="far fa-check-circle"></i></button></form> </td> 
+        
+    </tr>
+    {% endfor %}
+
+    
+
+  </tbody>
+</table>
+
+
+
+                </div>  <!-- card bitis -->
+            </div>      <!-- orta Bar end -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+<!-- ################################### -->
+
+</div>      <!-- row end -->
+    </div>  <!-- container end -->
+
+
+{% for itiraflar in itiraflar %}
+<!-- yaz modal-->
+<div class="modal fade" id="itiraf-{{ itiraflar['itiraf_id'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+        {% if itiraflar['cinsiyet'] == "kadin" %}
+        	&nbsp;	&nbsp;<span class="badge badge-danger">  <i class="fas fa-venus"></i></span>
+        {% else %}
+        	&nbsp;	&nbsp;<span class="badge badge-cyan"><i class="fas fa-mars"></i></span>
+        {% endif %} {{ itiraflar['rumuz'] }}
+        <br><br>
+  {{ itiraflar['itiraf'] }}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- yaz modal -->
+{% endfor %}
+
+
+{% else %}
+mod değilsiniz
+{% endif %}
+
+
+{% endblock body %}

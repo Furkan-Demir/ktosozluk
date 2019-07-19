@@ -1,0 +1,31 @@
+{% extends "sistem.html" %}
+{% block title %} Arama{% endblock %}
+{% block body %}
+<div class="container">
+
+<div class="card">
+
+{{ kelime }}
+<form class="border rounded p-5" action="{{ urlbu }}" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" name="{{ yontem }}" placeholder="arama" required="">
+				</div>
+
+				<button type="submit" class="btn btn-success btn-round btn-block shadow-sm">Giriş</button>
+</form>
+
+{% for cek in cek %}
+{% if cek['baslik_baslik'] %}
+<a href="/baslik/{{ cek['baslik_id']}}"><li> {{ cek['baslik_baslik'] }}  </li></a> <br>
+
+
+{% else %}
+
+<a href="/profil/{{ cek['nick']}}"><li> {{ cek['nick']}} </li></a>
+
+{% endif %}
+{% endfor %}
+
+</div>
+</div>
+{% endblock body %}

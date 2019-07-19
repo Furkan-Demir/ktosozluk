@@ -1,0 +1,260 @@
+{% extends "sistem.html" %}
+
+{% block title %} KTO-Sözlük | Ayarlar {% endblock %}
+
+{% block body %}
+<br>
+<div class="container">
+<div class="row">
+
+<div class="col-md-3 col-xs-12">
+<div class="card shadow">
+<p>
+  <a class="btn btn-primary w-100" data-toggle="collapse" 
+  href="#profil" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Profil Ayarları
+  </a><br><br>
+    <a class="btn btn-primary w-100" data-toggle="collapse" 
+  href="#sifre" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Şifremi Değiştir
+  
+ </a>
+</p>
+</div>
+</div> <!-- ayarlar sol bar-->
+<div class="col-md-9 col-xs-12">
+<div class="card shadow">
+<!-- -->
+<div class="collapse" id="profil">
+  <div class="card card-body">
+    
+<!-- button triggering modal -->
+<button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#adsoyad">
+Ad soyad değiştir </button>
+<br>
+<button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#bio">
+Biografim</button>
+<br>
+<button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#pp">
+Profil Fotoğrafım </button>
+<br>
+<button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#bolum">
+Okuduğum Bölüm</button>
+<br>
+<button type="button" class="btn btn-primary w-100" data-toggle="modal" data-target="#sosyalmedya">
+Sosyal Medya Hesaplarım</button>
+<!-- MODAL KISMI -->
+<!-- adsoyad -->
+<div class="modal fade" id="adsoyad" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+
+							<form class="border rounded p-5" action="/ayarlar" method="POST">
+				<div class="form-group">
+					<input type="text" class="form-control" name="name" id="name" placeholder="Ad Soyad" required="">
+				</div>
+				<button type="submit" class="btn btn-success btn-round  shadow-sm">
+                <i class="far fa-check-circle"></i></button>
+	<div class="invisible"><textarea class="form-control" id="id" rows="1" name ="id">{{ session['id'] }}</textarea></div>
+				
+			</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- adsoyad -->
+
+
+
+<!-- pp -->
+<div class="modal fade" id="pp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+
+							<form class="border rounded p-5" action="/ayarlar/upload" method="POST" enctype=multipart/form-data>
+				<div class="form-group"><input type=file name=file>					
+				</div>
+				<button type="submit" class="btn btn-success btn-round  shadow-sm">
+                <i class="far fa-check-circle"></i></button>
+	<div class="invisible"><textarea class="form-control" id="id" rows="1" name ="id">{{ session['id'] }}</textarea></div>
+				
+			</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- pp -->
+
+
+<!-- sosyal medya -->
+<div class="modal fade" id="sosyalmedya" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+
+							<form class="border rounded p-5" action="/ayarlar/sosyal" method="POST">
+				<div class="form-group">
+					<i class="fab fa-facebook-square"></i>&nbsp;Kullanıcı Adınız:
+					<textarea class="form-control" rows="1" name ="face">{{ gel['face'] }}</textarea>
+				</div>
+				<div class="form-group">
+					<i class="fab fa-instagram"></i>&nbsp;Kullanıcı Adınız:
+					<textarea class="form-control"  rows="1" name ="insta">{{ gel['insta'] }}</textarea>
+				</div>
+				<div class="form-group">
+					<i class="fab fa-twitter"></i>&nbsp;Kullanıcı Adınız:
+					<textarea class="form-control"  rows="1" name ="twitter">{{ gel['twitter'] }}</textarea>
+
+				</div>
+
+<div class="invisible"><textarea class="form-control" id="id" rows="1" name ="id">{{ session['id'] }}</textarea></div>
+
+				<button type="submit" class="btn btn-success btn-round  shadow-sm">
+                <i class="far fa-check-circle"></i></button>
+	
+				
+			</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- sosyal medya -->
+
+
+
+
+
+
+<!-- bio -->
+<div class="modal fade" id="bio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+
+							<form class="border rounded p-5" action="/ayarlar/bio" method="POST">
+				<div class="form-group">
+					<i class="fas fa-user-alt"></i>
+					<textarea class="form-control" rows="7" id="yazi" name ="bio">{{ gel['bio'] }}</textarea>
+					<div id="sonuc"></div>
+				</div>
+
+
+<div class="invisible"><textarea class="form-control" id="id" rows="1" name ="id">{{ session['id'] }}</textarea></div>
+
+				<button type="submit" class="btn btn-success btn-round  shadow-sm">
+                <i class="far fa-check-circle"></i></button>
+	
+				
+			</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bio -->
+
+<!-- bolum -->
+<div class="modal fade" id="bolum" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+
+							<form class="border rounded p-5" action="/ayarlar/bolum" method="POST">
+				<div class="form-group">
+					<i class="fas fa-user-alt"></i>
+					<textarea class="form-control" rows="1" name ="bolum">{{ gel['bolum'] }}</textarea>
+					<div id="sonuc"></div>
+				</div>
+
+
+<div class="invisible"><textarea class="form-control" id="id" rows="1" name ="id">{{ session['id'] }}</textarea></div>
+
+				<button type="submit" class="btn btn-success btn-round  shadow-sm">
+                <i class="far fa-check-circle"></i></button>
+	
+				
+			</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- bolum -->
+
+
+<!-- MODAL KISMI BITIS -->
+  </div>
+</div>
+<br>
+<!-- -->
+<!-- -->
+<div class="collapse" id="sifre">
+  <div class="card card-body">
+    şifre proident.
+  </div>
+</div>
+<br>
+<!-- -->
+
+
+
+</div>
+</div>
+
+</div>      <!-- container -->
+</div>      <!-- row -->
+<br>
+
+<script>
+      var yazi=document.querySelector('#yazi');  
+      var sonuc=document.querySelector('#sonuc');  
+    
+    yazi.oninput=function(){
+        var maksimum=250;
+        this.value=this.value.substr(0,maksimum);
+        var kalan= maksimum-this.value.length;
+        sonuc.innerHTML='Kalan Karakter : '+kalan;
+    }
+    </script>
+{% endblock body %}
+

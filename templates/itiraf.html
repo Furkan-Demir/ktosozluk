@@ -1,0 +1,128 @@
+{% extends "sistem.html" %}
+{% block title %} Anonim Duvarı {% endblock %}
+
+<!-- Basla --> 
+{% block body %}
+<br>
+    <div class="container">
+        <div class="row">
+        <div class="col-12">
+<div class="d-none d-sm-block d-block d-md-none text-center">
+<div class="card">
+  <div class="card-body ">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itiraf">
+Paylaş!</button>
+  </div>
+</div>
+<br>
+</div>
+</div>
+
+
+
+<div class="col-md-9 col-sm-12"> <!-- Orta Bar -->
+<div class="alert alert-orange" role="alert">
+    <i class="fas fa-bullhorn"></i> Yazılar Moderatör onayından sonra paylaşılmaktadır.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">×</span>
+    </button>
+</div>
+{% for itiraflar in itiraflar %}
+
+<div class="card">
+  <div class="card-header">
+    Rumuz: {{itiraflar['rumuz']}} 
+        {% if itiraflar['cinsiyet'] == "kadin" %}
+        	&nbsp;	&nbsp;<span class="badge badge-danger">  <i class="fas fa-venus"></i></span>
+        {% else %}
+        	&nbsp;	&nbsp;<span class="badge badge-cyan"><i class="fas fa-mars"></i></span>
+        {% endif %}
+        
+  </div>
+  <div class="card-body">
+    
+      <p class="text-break">{{itiraflar['itiraf']}}</p>
+<footer class="blockquote-footer text-right"><cite title="Source Title">{{itiraflar['tarih']}}</cite>
+<form action="/anonim/sikayet/{{itiraflar['itiraf_id']}}" method="POST"><button class="badge badge-danger"><i class="fas fa-exclamation"></i></button></form></footer>
+
+  </div>
+</div>
+<br>
+{% endfor %}
+<br>
+</div> <!-- Orta Bar Bitis -->
+
+<!-- Sag Bar -->
+<div class="col-md-3 col-sm-12 text-center">
+<div class="card">
+  <div class="card-body">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#itiraf">
+Paylaş!</button>
+  </div>
+</div>
+<br>
+</div>
+<!-- Sag Bar Bitis -->
+
+
+        </div>
+    </div>
+
+
+<!-- modal -->
+
+<!-- itiraf -->
+<div class="modal fade" id="itiraf" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header border-0">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="pb-4 pr-4 pl-4 text-center">
+
+							<form class="border rounded p-5" action="/anonim" method="POST">
+
+				<div class="form-group">
+					<input type="text" class="form-control" name="rumuz" id="rumuz" placeholder="Rumuz" required="">
+				</div>
+				<div class="form-group">
+					
+				  <textarea class="form-control" rows="7" id="yazi" name ="itiraf" placeholder="İtirafınız"></textarea>
+        </div>
+        <small class="text-muted"><div id="sonuc"></div></small>
+                <div class="row text-center">
+<div class="col-6">
+<div class="form-check ">
+  <input class="form-check-input" type="radio" name="cinsiyet" id="exampleRadios1" value="erkek" checked>
+  <label class="form-check-label" for="exampleRadios1">
+    <span class="badge badge-cyan"><i class="fas fa-mars"></i></span>
+  </label>
+</div>
+</div>
+<div class="col-6">
+<div class="form-check ">
+  <input class="form-check-input" type="radio" name="cinsiyet" id="exampleRadios2" value="kadin">
+  <label class="form-check-label" for="exampleRadios2">
+  <span class="badge badge-danger">  <i class="fas fa-venus"></i></span>
+  </label>
+</div>
+</div>
+</div>
+				<button type="submit" class="btn btn-success btn-round  shadow-sm">
+                <i class="far fa-check-circle"></i></button>
+	
+				
+			</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- adsoyad -->
+
+<!-- modal bitis -->
+
+{% endblock %}
